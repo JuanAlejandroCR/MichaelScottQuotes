@@ -1,3 +1,6 @@
 requests
 schedule
 tweepy
+python-dotenv
+transformers
+torch
