@@ -17,8 +17,13 @@ docker-compose up --build -d
 
 ## 🔹 Tecnologías utilizadas
 - **Python 3.11**
-- **requests** para obtener frases de la API de *The Office*
+- **Hugging Face** para generación de frases con *Mistral-7B-Instruct*
+- **requests** para obtener frases icónicas desde la API de *The Office*
 - **schedule** para manejar las publicaciones cada 12 horas
+- **tweepy** para interactuar con la API de Twitter/X
+- **python-dotenv** para la gestión de variables de entorno
+- **transformers** y **torch** para el procesamiento de IA
 - **Docker** para contenerizar el bot
 
-¡Diviértete con las frases de Michael Scott! 🎉
+---
+# That's what she said! 🎉
