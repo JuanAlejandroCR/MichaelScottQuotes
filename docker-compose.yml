@@ -1,18 +1,6 @@
-# docker-compose.yml para el bot de Michael Scott
-
 version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama
-    container_name: ollama
-    restart: always
-    ports:
-      - "11435:11435"
-    volumes:
-      - ollama_data:/root/.ollama
-    command: ["/bin/sh", "-c", "ollama pull gemma && ollama serve"]  # 🔹 Descarga el modelo gemma y ejecuta Ollama
-
   michael_scott_bot:
     build: .
     container_name: michael_scott_bot
@@ -22,11 +10,10 @@ services:
       - TWITTER_API_SECRET=${TWITTER_API_SECRET}
       - TWITTER_ACCESS_TOKEN=${TWITTER_ACCESS_TOKEN}
       - TWITTER_ACCESS_SECRET=${TWITTER_ACCESS_SECRET}
-      - OLLAMA_API_URL=http://ollama:11435  # 🔹 URL del servicio de Ollama dentro de Docker
-    depends_on:
-      - ollama
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+    volumes:
+      - huggingface_cache:/root/.cache/huggingface/transformers  # 🔹 Evitará descargas repetidas
     command: ["python", "src/main.py"]
 
 volumes:
-  ollama_data:
-
+  huggingface_cache:
