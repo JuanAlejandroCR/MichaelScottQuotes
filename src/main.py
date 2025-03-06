@@ -34,8 +34,8 @@ client = tweepy.Client(
     access_token_secret=TWITTER_ACCESS_SECRET
 )
 
-# Cargar modelo de Hugging Face (modelo optimizado para menor uso de RAM)
-generator = pipeline("text-generation", model="facebook/opt-1.3b", device=-1, torch_dtype="auto", use_auth_token=HUGGINGFACE_API_KEY)
+# Cargar modelo de Hugging Face (mejor calidad de generación de texto)
+generator = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct", device=-1, torch_dtype="auto", token=HUGGINGFACE_API_KEY)
 
 # Interfaz para la fábrica de frases
 class PhraseFactory(ABC):
@@ -63,7 +63,7 @@ class DynamicPhraseFactory(PhraseFactory):
         date_str = today.strftime("%d de %B")
         prompt = f"Eres Michael Scott de The Office. Di algo gracioso sobre el día {date_str}."
         
-        response = generator(prompt, max_length=50)
+        response = generator(prompt, max_length=50, truncation=True)
         return response[0]["generated_text"]
 
 # Cliente que usa la fábrica
@@ -94,8 +94,8 @@ def post_phrase():
     except Exception as e:
         print("❌ Error al publicar en Twitter:", e)
 
-# Programar ejecución cada 1 minuto para pruebas
-schedule.every(1).minutes.do(post_phrase)
+# Programar ejecución cada 12 horas
+schedule.every(12).hours.do(post_phrase)
 
 if __name__ == "__main__":
     print("Bot de Michael Scott iniciado...")
