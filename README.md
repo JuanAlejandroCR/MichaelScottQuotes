@@ -18,7 +18,7 @@ docker-compose up --build -d
 ## 🔹 Tecnologías utilizadas
 - **Python 3.11**
 - **requests** para obtener frases de la API de *The Office*
-- **schedule** para manejar las publicaciones cada 30 minutos
+- **schedule** para manejar las publicaciones cada 12 horas
 - **Docker** para contenerizar el bot
 
 ¡Diviértete con las frases de Michael Scott! 🎉
